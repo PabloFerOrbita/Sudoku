@@ -159,6 +159,7 @@ function imprimirSudoku() {
                             if (e.key != '0' && !isNaN(parseInt(e.key))) {
                                 $(e.target).val(parseInt(e.key));
                             }
+                            comprobarVictoria();
                         })
                     } else {
                         $(a).append(`<input type="text" class="w-25 p-1 text-center matriz${indiceMatriz + indiceFila * 3} fila${indiceArray + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" disabled value="${celda}" />`)
@@ -175,7 +176,6 @@ function imprimirSudoku() {
         $('#cuerpo').append(f)
     })
     $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="salir" class="btn btn-success">Cambiar Dificultad</button><button id="validar" class="btn btn-success">Validar</button></div> ')
-    $('#validar').on('click', comprobarVictoria);
     $('#resolver').on('click', rellenar);
     $('#salir').on('click', preguntar_dificultad);
     $('#cuerpo').append('<h1 id="resultado" class="text-danger-emphasis"></h1>')
@@ -221,12 +221,19 @@ function manejarCompletacion() {
 function comprobarRepetidos(base) {
     var matriz = []
     matriz = $(base).map((index, element) => {
+        $(element).removeClass('text-danger');
         if (element.value != '') {
             return element.value
         }
     }).get();
-    matriz = [...new Set(matriz)];
-    if (matriz.length != 9) {
+    let matrizSinRepetidos = [...new Set(matriz)];
+    if (matrizSinRepetidos.length != 9) {
+        $(base).map((index, numero) => {            
+            cuenta = matriz.filter(element => element == numero.value).length;
+            if (cuenta > 1) {
+                $(numero).addClass('text-danger');
+            }
+        })
         return true
     }
     return false;
