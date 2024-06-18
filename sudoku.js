@@ -18,7 +18,7 @@ function preguntar_dificultad() {
     $('button').on('click', (e) => {
         dificultad = parseInt(e.target.id);
         prepararJuego()
-        
+
     });
 }
 function prepararJuego() {
@@ -174,5 +174,35 @@ function imprimirSudoku() {
         )
         $('#cuerpo').append(f)
     })
+    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="validar" class="btn btn-success">Validar</button></div> ')
+    $('#validar').on('click', comprobarVictoria);
+
+}
+
+function comprobarVictoria() {
+    for (let i = 0; i < 9; i++) {
+        if (comprobarRepetidos(`.matriz${i}`) || comprobarRepetidos(`.fila${i}`) || comprobarRepetidos(`.columna${i}`)) {
+            return false
+        }
+    }
+    $('#resultado').text('Sudoku completado');
+    $('input').attr('disabled', true);
+    $('button').attr('disabled', true);
+    $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
+    
+    return true;
+}
+function comprobarRepetidos(base) {
+    var matriz = []
+    matriz = $(base).map((index, element) => {
+        if (element.value != '') {
+            return element.value
+        }
+    }).get();
+    matriz = [...new Set(matriz)];
+    if (matriz.length != 9) {
+        return true
+    }
+    return false;
 
 }
