@@ -174,8 +174,22 @@ function imprimirSudoku() {
         )
         $('#cuerpo').append(f)
     })
-    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="validar" class="btn btn-success">Validar</button></div> ')
+    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="validar" class="btn btn-success">Validar</button></div> ')
     $('#validar').on('click', comprobarVictoria);
+    $('#resolver').on('click', rellenar);
+
+}
+function rellenar() {
+    for (let i = 0; i < 9; i++) {
+        $(`.matriz${i}`).map((index, element) => {
+            if (element.disabled != true) {
+                element.value = solucion[0];
+                solucion.shift();
+            }
+
+        })
+    }
+    comprobarVictoria();
 
 }
 
@@ -189,7 +203,10 @@ function comprobarVictoria() {
     $('input').attr('disabled', true);
     $('button').attr('disabled', true);
     $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
-    
+    $('#fin').append('<button id="cambiarDificultad" class="btn btn-primary">Cambiar dificultad</button>');
+    $('#fin').append('<button id="reintentar" class="btn btn-primary">Volver a intentarlo</button>');
+    $('#cambiarDificultad').on('click', preguntar_dificultad);
+    $('#reintentar').on('click', prepararJuego);
     return true;
 }
 function comprobarRepetidos(base) {
