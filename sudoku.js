@@ -102,3 +102,26 @@ function numero_en_columna(columnas, numero, indexMatriz, indexColumna) {
     }
 
 }
+
+function quitarNumeros() {
+    var ceros = 0;
+    while (ceros <= dificultad) {
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                for (var k = 0; k < 3; k++) {
+                    for (var l = 0; l < 3; l++) {
+                        var random = Math.floor(Math.random() * 101);
+                        if (random > 70 && typeof sudoku[i][j][k][l] != 'string') {
+                            sudoku[i][j][k][l] = sudoku[i][j][k][l].toString();
+                            ceros++;
+                            if (ceros == dificultad) {
+                                return;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
