@@ -1,5 +1,9 @@
 var dificultad;
 var sudoku;
+var solucion;
+function cargarPagina() {
+    preguntar_dificultad();
+}
 
 function preguntar_dificultad() {
     $('#cuerpo').empty();
@@ -13,8 +17,18 @@ function preguntar_dificultad() {
     $('#opciones').append('<button id="19" class="btn btn-primary mb-2 w-25">Fácil</button>')
     $('button').on('click', (e) => {
         dificultad = parseInt(e.target.id);
+        prepararJuego()
         
     });
+}
+function prepararJuego() {
+    sudoku = generarSudoku();
+    while (sudoku == false) {
+        sudoku = generarSudoku();
+    }
+    quitarNumeros();
+    imprimirSudoku();
+
 }
 
 function generarSudoku() {
