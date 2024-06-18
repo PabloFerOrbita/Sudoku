@@ -174,9 +174,10 @@ function imprimirSudoku() {
         )
         $('#cuerpo').append(f)
     })
-    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="validar" class="btn btn-success">Validar</button></div> ')
+    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="salir" class="btn btn-success">Cambiar Dificultad</button><button id="validar" class="btn btn-success">Validar</button></div> ')
     $('#validar').on('click', comprobarVictoria);
     $('#resolver').on('click', rellenar);
+    $('#salir').on('click', preguntar_dificultad);
     $('#cuerpo').append('<h1 id="resultado" class="text-danger-emphasis"></h1>')
 
 }
