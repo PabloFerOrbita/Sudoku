@@ -177,6 +177,7 @@ function imprimirSudoku() {
     $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="validar" class="btn btn-success">Validar</button></div> ')
     $('#validar').on('click', comprobarVictoria);
     $('#resolver').on('click', rellenar);
+    $('#cuerpo').append('<h1 id="resultado" class="text-danger-emphasis"></h1>')
 
 }
 function rellenar() {
@@ -223,3 +224,4 @@ function comprobarRepetidos(base) {
     return false;
 
 }
+$(window).on('load', cargarPagina);
