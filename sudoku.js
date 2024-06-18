@@ -213,7 +213,7 @@ function manejarCompletacion() {
     $('button').attr('disabled', true);
     $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
     $('#fin').append('<button id="cambiarDificultad" class="btn btn-primary">Cambiar dificultad</button>');
-    $('#fin').append('<button id="reintentar" class="btn btn-primary">Volver a intentarlo</button>');
+    $('#fin').append('<button id="reintentar" class="btn btn-primary">Intentar otro con la misma dificultad</button>');
     $('#cambiarDificultad').on('click', preguntar_dificultad);
     $('#reintentar').on('click', prepararJuego);
 
