@@ -192,7 +192,7 @@ function rellenar() {
         })
     }
     $('#resultado').text('Te has Rendido');
-    manejarCompletación()
+    manejarCompletacion()
     return true;
 
 }
@@ -204,7 +204,7 @@ function comprobarVictoria() {
         }
     }
     $('#resultado').text('Has completado el sudoku');
-    manejarCompletación()
+    manejarCompletacion()
     return true;
 }
 
