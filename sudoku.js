@@ -1,4 +1,5 @@
 var dificultad;
+var sudoku;
 
 function preguntar_dificultad() {
     $('#cuerpo').empty();
@@ -14,4 +15,90 @@ function preguntar_dificultad() {
         dificultad = parseInt(e.target.id);
         
     });
+}
+
+function generarSudoku() {
+    tablero = [];
+    for (var i = 0; i < 3; i++) {
+        var filaSudoku = [];
+        for (var j = 0; j < 3; j++) {
+            var matriz = [];
+            var numerosPosibles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            for (var k = 0; k < 3; k++) {
+                var fila = [];
+                for (var l = 0; l < 3; l++) {
+                    var numero = numerosPosibles[(Math.floor(Math.random() * numerosPosibles.length))];;
+                    if (numeroEnFila(filaSudoku, numero, k) || numero_en_columna(tablero, numero, j, l)) {
+                        numeroValido = validar(numerosPosibles, filaSudoku, k, tablero, j, l)
+                        if (numeroValido == 0) {
+                            return false;
+                        }
+                        numero = numeroValido;
+                    }
+                    numerosPosibles = numerosPosibles.filter(element => element != numero);
+                    fila.push(numero);
+                }
+
+                matriz.push(fila);
+
+            }
+
+            filaSudoku.push(matriz);
+        }
+        tablero.push(filaSudoku);
+
+    }
+    return tablero;
+
+
+}
+function numeroEnFila(fila, numero, indice) {
+    if (fila.length == 0) {
+        return false;
+    }
+    for (var i = 0; i < fila.length; i++) {
+        if (fila[i][indice].includes(numero)) {
+            return true;
+
+        }
+    }
+    return false;
+
+}
+
+
+function validar(numerosPosibles, fila, index, columnas, indexMatriz, indexColumna) {
+    var valido = 0;
+    numerosPosibles.forEach(element => {
+        if (!numeroEnFila(fila, element, index) && !numero_en_columna(columnas, element, indexMatriz, indexColumna)) {
+            valido = element;
+            return;
+        }
+    })
+    return valido;
+
+}
+
+function numero_en_columna(columnas, numero, indexMatriz, indexColumna) {
+    if (columnas.length == 0) {
+        return false;
+    }
+
+    for (var i = 0; i <= 2; i++) {
+        if (columnas[0][indexMatriz][i][indexColumna] == numero) {
+            return true;
+
+        }
+    }
+
+    if (columnas.length < 2) {
+        return false;
+    }
+    for (var i = 0; i <= 2; i++) {
+        if (columnas[1][indexMatriz][i][indexColumna] == numero) {
+            return true;
+
+        }
+    }
+
 }
