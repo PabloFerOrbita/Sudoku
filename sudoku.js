@@ -191,7 +191,9 @@ function rellenar() {
 
         })
     }
-    comprobarVictoria();
+    $('#resultado').text('Te has Rendido');
+    manejarCompletación()
+    return true;
 
 }
 
@@ -201,7 +203,12 @@ function comprobarVictoria() {
             return false
         }
     }
-    $('#resultado').text('Sudoku completado');
+    $('#resultado').text('Has completado el sudoku');
+    manejarCompletación()
+    return true;
+}
+
+function manejarCompletacion() {
     $('input').attr('disabled', true);
     $('button').attr('disabled', true);
     $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
@@ -209,7 +216,7 @@ function comprobarVictoria() {
     $('#fin').append('<button id="reintentar" class="btn btn-primary">Volver a intentarlo</button>');
     $('#cambiarDificultad').on('click', preguntar_dificultad);
     $('#reintentar').on('click', prepararJuego);
-    return true;
+
 }
 function comprobarRepetidos(base) {
     var matriz = []
