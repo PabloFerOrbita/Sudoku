@@ -125,3 +125,40 @@ function quitarNumeros() {
         }
     }
 }
+
+function imprimirSudoku() {
+    $('#cuerpo').empty();
+    solucion = []
+    sudoku.forEach((fila, indiceFila) => {
+
+        var f = $(`<div  class="w-25  d-flex flex-row"></div>`)
+
+        fila.forEach((matriz, indiceMatriz) => {
+            var m = $(`<div class="w-50 h-100 d-flex flex-column align-items-center border border-1 p-2 "></div>`)
+            matriz.forEach((array, indiceArray) => {
+                var a = $(`<div  class=" w-100 d-flex flex-row justify-content-around mb-1 array"></div>`)
+                array.forEach((celda, indiceColumna) => {
+                    if (typeof celda == 'string') {
+                        solucion.push(parseInt(celda));
+                        $(a).append(`<input type="text" class="w-25 p-1 text-center fila${indiceArray + indiceFila * 3}  matriz${indiceMatriz + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" />`).on('keypress', (e) => {
+                            e.preventDefault();
+                            if (e.key != '0' && !isNaN(parseInt(e.key))) {
+                                $(e.target).val(parseInt(e.key));
+                            }
+                        })
+                    } else {
+                        $(a).append(`<input type="text" class="w-25 p-1 text-center matriz${indiceMatriz + indiceFila * 3} fila${indiceArray + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" disabled value="${celda}" />`)
+                    }
+                })
+
+                $(m).append(a);
+            })
+
+            $(f).append(m);
+        }
+
+        )
+        $('#cuerpo').append(f)
+    })
+
+}
