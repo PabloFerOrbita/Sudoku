@@ -154,7 +154,7 @@ function imprimirSudoku() {
                 array.forEach((celda, indiceColumna) => {
                     if (typeof celda == 'string') {
                         solucion.push(parseInt(celda));
-                        $(a).append(`<input type="text" class="w-25 p-1 celda text-center fila${indiceArray + indiceFila * 3}  matriz${indiceMatriz + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" />`);
+                        $(a).append(`<input type="text" class="w-25 p-1 celda text-center fila${indiceArray + indiceFila * 3} matriz${indiceMatriz + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" />`);
                     } else {
                         $(a).append(`<input type="text" class="w-25 p-1 text-center matriz${indiceMatriz + indiceFila * 3} fila${indiceArray + indiceFila * 3} columna${indiceColumna + indiceMatriz * 3}" disabled value="${celda}" />`)
                     }
@@ -172,7 +172,7 @@ function imprimirSudoku() {
     })
     $('input').on('keydown', (e) => {
         e.preventDefault();
-        
+
         if (e.key == 'Backspace') {
             $(e.target).val('')
         }
@@ -181,8 +181,18 @@ function imprimirSudoku() {
         }
         comprobarVictoria();
     })
-   
-    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="salir" class="btn btn-success">Cambiar Dificultad</button><button id="validar" class="btn btn-success">Validar</button></div> ')
+    $('input').on('focus', (e) => {
+        
+        var clases = $(e.target).prop('class').split(' ').filter(element => element.includes('fila') || element.includes('columna') || element.includes('matriz'));
+        clases.forEach(element => {
+            $(`.${element}`).addClass('bg-primary-subtle');
+        })
+    })
+    $('input').on('blur', () => {
+        $('input').removeClass('bg-primary-subtle');
+    })
+
+    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="salir" class="btn btn-success">Cambiar Dificultad</button></div> ')
     $('#resolver').on('click', rellenar);
     $('#salir').on('click', preguntar_dificultad);
     $('#cuerpo').append('<h1 id="resultado" class="text-danger-emphasis"></h1>')
