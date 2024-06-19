@@ -217,7 +217,7 @@ function rellenar() {
 
 function comprobarVictoria() {
     let repetidos = 0;
-    $('input').removeClass('text-danger');
+    $('input').removeClass('bg-danger-subtle');
     for (let i = 0; i < 9; i++) {
         let repetidoenMatriz = comprobarRepetidos(`.matriz${i}`)
         let repetidoenFila = comprobarRepetidos(`.fila${i}`)
@@ -256,7 +256,7 @@ function comprobarRepetidos(base) {
         $(base).map((index, numero) => {
             cuenta = matriz.filter(element => element == numero.value).length;
             if (cuenta > 1) {
-                $(numero).addClass('text-danger');
+                $(numero).addClass('bg-danger-subtle');
             }
         })
         return true
