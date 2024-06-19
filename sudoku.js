@@ -11,10 +11,10 @@ function preguntar_dificultad() {
     $('#dificultad').append('<h1 class="text-danger-emphasis">SUDOKU</h1>')
     $('#dificultad').append('<h6 class="mb-5 text-danger-emphasis">Fácil = 19 huecos, Medio = 28 huecos, Difícil = 37 huecos, Muy difícil = 46 huecos</h6>')
     $('#dificultad').append('<div id="opciones" class="d-flex flex-column justify-content-center align-items-center w-75"></div>')
-    $('#opciones').append('<button id="46" class="btn btn-primary mb-2 w-25">Muy Difícil</button>');
-    $('#opciones').append('<button id="37" class="btn btn-primary mb-2 w-25">Difícil</button>');
-    $('#opciones').append('<button id="28" class="btn btn-primary mb-2 w-25">Medio</button>');
-    $('#opciones').append('<button id="19" class="btn btn-primary mb-2 w-25">Fácil</button>')
+    $('#opciones').append('<button id="46" class="btn btn-primary mb-2 w-50">Muy Difícil</button>');
+    $('#opciones').append('<button id="37" class="btn btn-primary mb-2 w-50">Difícil</button>');
+    $('#opciones').append('<button id="28" class="btn btn-primary mb-2 w-50">Medio</button>');
+    $('#opciones').append('<button id="19" class="btn btn-primary mb-2 w-50">Fácil</button>')
     $('button').on('click', (e) => {
         dificultad = parseInt(e.target.id);
         prepararJuego()
@@ -192,7 +192,7 @@ function imprimirSudoku() {
         $('input').removeClass('bg-primary-subtle');
     })
 
-    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success">Resolver</button><button id="regenerar" class="btn btn-success">Regenerar</button><button id="salir" class="btn btn-success">Cambiar Dificultad</button></div> ')
+    $('#cuerpo').append('<div id="botones" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"><button id="resolver" class="btn btn-success w-25">Resolver</button><button id="regenerar" class="btn btn-success w-25">Regenerar</button><button id="salir" class="btn btn-success w-25">Cambiar Dificultad</button></div> ')
     $('#resolver').on('click', rellenar);
     $('#regenerar').on('click', prepararJuego);
     $('#salir').on('click', preguntar_dificultad);
@@ -237,9 +237,9 @@ function comprobarVictoria() {
 function manejarCompletacion() {
     $('input').prop('disabled', true);
     $('button').prop('disabled', true);
-    $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
-    $('#fin').append('<button id="cambiarDificultad" class="btn btn-primary">Cambiar dificultad</button>');
-    $('#fin').append('<button id="reintentar" class="btn btn-primary">Intentar otro con la misma dificultad</button>');
+    $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-column align-items-center w-25 "></div>')
+    $('#fin').append('<button id="cambiarDificultad" class="mb-2 w-50 btn btn-primary">Cambiar dificultad</button>');
+    $('#fin').append('<button id="reintentar" class=" w-50 btn btn-primary">Intentar otro con la misma dificultad</button>');
     $('#cambiarDificultad').on('click', preguntar_dificultad);
     $('#reintentar').on('click', prepararJuego);
 
