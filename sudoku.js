@@ -235,8 +235,8 @@ function comprobarVictoria() {
 }
 
 function manejarCompletacion() {
-    $('input').attr('disabled', true);
-    $('button').attr('disabled', true);
+    $('input').prop('disabled', true);
+    $('button').prop('disabled', true);
     $('#cuerpo').append('<div id="fin" class="mt-3 mb-3 d-flex flex-row w-25 justify-content-around"></div>')
     $('#fin').append('<button id="cambiarDificultad" class="btn btn-primary">Cambiar dificultad</button>');
     $('#fin').append('<button id="reintentar" class="btn btn-primary">Intentar otro con la misma dificultad</button>');
