@@ -200,6 +200,7 @@ function imprimirSudoku() {
 
 }
 function rellenar() {
+    $('input').removeClass('bg-danger-subtle');
     for (let i = 0; i < 9; i++) {
         $(`.matriz${i}`).map((index, element) => {
             if (element.disabled != true) {
